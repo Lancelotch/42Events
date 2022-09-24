@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { useRoutes } from "react-router-dom";
+import routes from "src/routers";
+import "./App.css";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#eb3d49",
+    },
+    common: {
+      black: "#000",
+      white: "#FFF",
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1840,
+    },
+  },
+});
 
 function App() {
+  const content = useRoutes(routes());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {content}
+    </ThemeProvider>
   );
 }
 
